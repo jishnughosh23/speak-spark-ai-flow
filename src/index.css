@@ -7,82 +7,82 @@
 
 @layer base {
   :root {
-    --background: 200 25% 90%;
-    --foreground: 200 30% 15%;
+    --background: 0 0% 100%;
+    --foreground: 200 45% 30%;
 
-    --card: 200 25% 95%;
-    --card-foreground: 200 30% 15%;
+    --card: 0 0% 98%;
+    --card-foreground: 200 45% 30%;
 
-    --popover: 200 25% 95%;
-    --popover-foreground: 200 30% 15%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 200 45% 30%;
 
     --primary: 200 45% 30%;
-    --primary-foreground: 200 25% 90%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 20% 85%;
-    --secondary-foreground: 200 30% 15%;
+    --secondary: 200 10% 95%;
+    --secondary-foreground: 200 45% 30%;
 
-    --muted: 200 20% 85%;
-    --muted-foreground: 200 15% 45%;
+    --muted: 200 10% 95%;
+    --muted-foreground: 200 20% 50%;
 
-    --accent: 200 20% 85%;
-    --accent-foreground: 200 30% 15%;
+    --accent: 200 10% 95%;
+    --accent-foreground: 200 45% 30%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 200 20% 80%;
-    --input: 200 20% 80%;
+    --border: 200 20% 90%;
+    --input: 200 20% 90%;
     --ring: 200 45% 30%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 200 25% 95%;
-    --sidebar-foreground: 200 30% 20%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 200 45% 25%;
     --sidebar-primary: 200 45% 30%;
-    --sidebar-primary-foreground: 200 25% 90%;
-    --sidebar-accent: 200 20% 90%;
-    --sidebar-accent-foreground: 200 30% 15%;
-    --sidebar-border: 200 20% 85%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 200 10% 95%;
+    --sidebar-accent-foreground: 200 45% 30%;
+    --sidebar-border: 200 20% 90%;
     --sidebar-ring: 200 45% 30%;
   }
 
   .dark {
-    --background: 200 45% 15%;
-    --foreground: 200 25% 90%;
+    --background: 200 45% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 200 45% 18%;
-    --card-foreground: 200 25% 90%;
+    --card: 200 45% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 200 45% 18%;
-    --popover-foreground: 200 25% 90%;
+    --popover: 200 45% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 200 25% 85%;
+    --primary: 0 0% 100%;
     --primary-foreground: 200 45% 15%;
 
-    --secondary: 200 30% 25%;
-    --secondary-foreground: 200 25% 90%;
+    --secondary: 200 30% 20%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 200 30% 25%;
+    --muted: 200 30% 20%;
     --muted-foreground: 200 15% 65%;
 
-    --accent: 200 30% 25%;
-    --accent-foreground: 200 25% 90%;
+    --accent: 200 30% 20%;
+    --accent-foreground: 0 0% 95%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 85.7% 97.3%;
 
-    --border: 200 30% 25%;
-    --input: 200 30% 25%;
-    --ring: 200 25% 85%;
-    --sidebar-background: 200 45% 12%;
-    --sidebar-foreground: 200 25% 85%;
-    --sidebar-primary: 200 25% 80%;
+    --border: 200 30% 20%;
+    --input: 200 30% 20%;
+    --ring: 0 0% 95%;
+    --sidebar-background: 200 45% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 0 0% 95%;
     --sidebar-primary-foreground: 200 45% 15%;
-    --sidebar-accent: 200 30% 20%;
-    --sidebar-accent-foreground: 200 25% 85%;
-    --sidebar-border: 200 30% 20%;
-    --sidebar-ring: 200 25% 80%;
+    --sidebar-accent: 200 30% 15%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 200 30% 15%;
+    --sidebar-ring: 0 0% 95%;
   }
 }
 
@@ -100,13 +100,13 @@
 /* Custom animations and effects */
 @layer utilities {
   .glassmorphism {
-    background: rgba(200, 216, 228, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(200, 216, 228, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
   .gradient-text {
-    background: linear-gradient(45deg, #2b6777, #52bad5, #c8d8e4);
+    background: linear-gradient(45deg, #2b6777, #ffffff, #2b6777);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -148,7 +148,7 @@
     box-shadow: 0 0 20px rgba(43, 103, 119, 0.3);
   }
   to {
-    box-shadow: 0 0 30px rgba(82, 186, 213, 0.5);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
   }
 }
 

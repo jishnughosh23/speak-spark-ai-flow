@@ -1,12 +1,75 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { Play, Star, CheckCircle, Globe, MessageSquare, BarChart3 } from 'lucide-react';
+import { Play, Star, CheckCircle, Globe, MessageSquare, BarChart3, Users, Award, Zap, Heart, Twitter, Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
+  const heroRef = useRef(null);
+  const featuresRef = useRef(null);
+  const statsRef = useRef(null);
+  const testimonialsRef = useRef(null);
+
+  useEffect(() => {
+    // Hero animations
+    gsap.fromTo(heroRef.current, 
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+    );
+
+    // Features animation
+    gsap.fromTo(".feature-card", 
+      { opacity: 0, y: 30, scale: 0.9 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: featuresRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+    // Stats counter animation
+    gsap.fromTo(".stat-number", 
+      { textContent: 0 },
+      { 
+        textContent: (i, el) => el.getAttribute('data-value'),
+        duration: 2,
+        ease: "power2.out",
+        snap: { textContent: 1 },
+        scrollTrigger: {
+          trigger: statsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+    // Testimonials stagger animation
+    gsap.fromTo(".testimonial-card", 
+      { opacity: 0, x: -50 },
+      { 
+        opacity: 1, 
+        x: 0,
+        duration: 0.8,
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: testimonialsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+  }, []);
+
   const features = [
     {
       icon: MessageSquare,
@@ -73,13 +136,20 @@ const Index = () => {
     }
   ];
 
+  const stats = [
+    { number: 50000, label: "Active Users", icon: Users },
+    { number: 150, label: "Languages Supported", icon: Globe },
+    { number: 95, label: "Success Rate", icon: Award, suffix: "%" },
+    { number: 24, label: "Hours Support", icon: Zap, suffix: "/7" }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#c8d8e4] via-[#f0f6f8] to-[#e8f2f5] dark:from-[#1a3a42] dark:via-[#2b6777] dark:to-[#1e4a54]">
+    <div className="min-h-screen bg-white dark:bg-[#2b6777]">
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 px-4 relative overflow-hidden">
+      <section className="pt-24 pb-20 px-4 relative overflow-hidden">
         {/* Background decoration */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <img 
             src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
             alt="Technology background"
@@ -87,7 +157,7 @@ const Index = () => {
           />
         </div>
         
-        <div className="container mx-auto text-center relative z-10">
+        <div className="container mx-auto text-center relative z-10" ref={heroRef}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -96,7 +166,7 @@ const Index = () => {
           >
             {/* AI Avatar Animation */}
             <motion.div
-              className="w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-[#2b6777] to-[#52bad5] rounded-full flex items-center justify-center shadow-2xl"
+              className="w-32 h-32 mx-auto mb-8 bg-[#2b6777] rounded-full flex items-center justify-center shadow-2xl"
               animate={{ 
                 scale: [1, 1.05, 1],
                 rotate: [0, 1, 0]
@@ -112,7 +182,7 @@ const Index = () => {
                 animate={{ 
                   boxShadow: [
                     "0 0 20px rgba(43, 103, 119, 0.3)",
-                    "0 0 40px rgba(82, 186, 213, 0.5)",
+                    "0 0 40px rgba(255, 255, 255, 0.5)",
                     "0 0 20px rgba(43, 103, 119, 0.3)"
                   ]
                 }}
@@ -122,18 +192,18 @@ const Index = () => {
               </motion.div>
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#2b6777] via-[#52bad5] to-[#2b6777] bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#2b6777] dark:text-white">
               Master Communication with AI
             </h1>
             
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-200 mb-12 max-w-3xl mx-auto">
               Transform your speaking skills through AI-powered video conversations. 
               Practice languages, ace interviews, and boost confidence with personalized feedback.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Link to="/dashboard">
-                <Button size="lg" className="text-lg px-8 py-6 bg-gradient-to-r from-[#2b6777] to-[#52bad5] hover:from-[#1e4a54] hover:to-[#3a8fa5] text-white shadow-xl">
+                <Button size="lg" className="text-lg px-8 py-6 bg-[#2b6777] hover:bg-[#1e4a54] text-white shadow-xl">
                   Start Now - It's Free
                 </Button>
               </Link>
@@ -146,116 +216,123 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-16 px-4 bg-gray-50 dark:bg-[#1e4a54]" ref={statsRef}>
+        <div className="container mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-[#2b6777] rounded-full flex items-center justify-center">
+                  <stat.icon className="w-8 h-8 text-white" />
+                </div>
+                <div className="text-3xl font-bold text-[#2b6777] dark:text-white mb-2">
+                  <span className="stat-number" data-value={stat.number}>0</span>
+                  {stat.suffix}
+                </div>
+                <p className="text-gray-600 dark:text-gray-200">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section className="py-16 px-4">
+      <section className="py-20 px-4" ref={featuresRef}>
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-[#2b6777]">Why Choose SpeakAI?</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4 text-[#2b6777] dark:text-white">Why Choose SpeakAI?</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-200 max-w-2xl mx-auto">
               Experience the future of language learning with cutting-edge AI technology
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                whileHover={{ y: -5 }}
+                className="feature-card h-full bg-white dark:bg-[#1e4a54] rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
               >
-                <Card className="h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                  <div className="h-48 overflow-hidden">
-                    <img 
-                      src={feature.image} 
-                      alt={feature.title}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-8 text-center">
+                  <div className="w-16 h-16 mx-auto mb-6 bg-[#2b6777] rounded-full flex items-center justify-center -mt-12 relative z-10 shadow-lg">
+                    <feature.icon className="w-8 h-8 text-white" />
                   </div>
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-[#2b6777] to-[#52bad5] rounded-full flex items-center justify-center -mt-12 relative z-10 shadow-lg">
-                      <feature.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-4 text-[#2b6777]">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  <h3 className="text-xl font-semibold mb-4 text-[#2b6777] dark:text-white">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-200">{feature.description}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 px-4 bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm">
+      <section className="py-20 px-4 bg-gray-50 dark:bg-[#1e4a54]" ref={testimonialsRef}>
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-[#2b6777]">What Our Users Say</h2>
-            <p className="text-xl text-muted-foreground">Join thousands of satisfied learners</p>
+            <h2 className="text-4xl font-bold mb-4 text-[#2b6777] dark:text-white">What Our Users Say</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-200">Join thousands of satisfied learners</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="testimonial-card h-full bg-white dark:bg-[#2b6777] rounded-lg shadow-xl p-6"
               >
-                <Card className="h-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl">
-                  <CardContent className="p-6">
-                    <div className="flex mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground mb-6">"{testimonial.content}"</p>
-                    <div className="flex items-center">
-                      <img 
-                        src={testimonial.avatar} 
-                        alt={testimonial.name}
-                        className="w-12 h-12 rounded-full mr-4 object-cover"
-                      />
-                      <div>
-                        <p className="font-semibold text-[#2b6777]">{testimonial.name}</p>
-                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-200 mb-6">"{testimonial.content}"</p>
+                <div className="flex items-center">
+                  <img 
+                    src={testimonial.avatar} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full mr-4 object-cover"
+                  />
+                  <div>
+                    <p className="font-semibold text-[#2b6777] dark:text-white">{testimonial.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-300">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section className="py-16 px-4">
+      <section className="py-20 px-4">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-[#2b6777]">Choose Your Plan</h2>
-            <p className="text-xl text-muted-foreground">Start free, upgrade when you're ready</p>
+            <h2 className="text-4xl font-bold mb-4 text-[#2b6777] dark:text-white">Choose Your Plan</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-200">Start free, upgrade when you're ready</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -271,25 +348,25 @@ const Index = () => {
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-[#2b6777] to-[#52bad5] text-white px-4 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-[#2b6777] text-white px-4 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
                   </div>
                 )}
-                <Card className={`h-full ${plan.popular ? 'border-2 border-[#2b6777] shadow-2xl' : ''} bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm`}>
+                <Card className={`h-full ${plan.popular ? 'border-2 border-[#2b6777] shadow-2xl' : ''} bg-white dark:bg-[#1e4a54]`}>
                   <CardContent className="p-8 text-center">
-                    <h3 className="text-2xl font-bold mb-4 text-[#2b6777]">{plan.name}</h3>
-                    <div className="text-4xl font-bold mb-6 text-primary">{plan.price}</div>
+                    <h3 className="text-2xl font-bold mb-4 text-[#2b6777] dark:text-white">{plan.name}</h3>
+                    <div className="text-4xl font-bold mb-6 text-[#2b6777] dark:text-white">{plan.price}</div>
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-center justify-center">
+                        <li key={i} className="flex items-center justify-center text-gray-600 dark:text-gray-200">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
                           {feature}
                         </li>
                       ))}
                     </ul>
                     <Button 
-                      className={`w-full ${plan.popular ? 'bg-gradient-to-r from-[#2b6777] to-[#52bad5] hover:from-[#1e4a54] hover:to-[#3a8fa5] text-white' : 'border-[#2b6777] text-[#2b6777] hover:bg-[#2b6777] hover:text-white'}`}
+                      className={`w-full ${plan.popular ? 'bg-[#2b6777] hover:bg-[#1e4a54] text-white' : 'border-[#2b6777] text-[#2b6777] hover:bg-[#2b6777] hover:text-white'}`}
                       variant={plan.popular ? 'default' : 'outline'}
                     >
                       Get Started
@@ -302,17 +379,112 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#2b6777] text-white py-12 px-4">
-        <div className="container mx-auto text-center">
-          <div className="text-2xl font-bold mb-4 bg-gradient-to-r from-[#c8d8e4] to-white bg-clip-text text-transparent">
-            SpeakAI
+      {/* Perfect Footer */}
+      <footer className="bg-[#2b6777] text-white py-16 px-4">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            {/* Logo and Description */}
+            <div className="md:col-span-1">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-3">
+                  <MessageSquare className="w-6 h-6 text-[#2b6777]" />
+                </div>
+                <h3 className="text-2xl font-bold">SpeakAI</h3>
+              </div>
+              <p className="text-gray-200 mb-6">
+                Empowering communication through cutting-edge AI technology. Join millions of learners worldwide.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Youtube className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Product Links */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Product</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">API</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Integrations</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Enterprise</a></li>
+              </ul>
+            </div>
+
+            {/* Support Links */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Support</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Contact Us</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Community</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Status</a></li>
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Contact</h4>
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <Mail className="w-5 h-5 mr-3 text-gray-200" />
+                  <span className="text-gray-200">hello@speakai.com</span>
+                </div>
+                <div className="flex items-center">
+                  <Phone className="w-5 h-5 mr-3 text-gray-200" />
+                  <span className="text-gray-200">+1 (555) 123-4567</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-5 h-5 mr-3 text-gray-200" />
+                  <span className="text-gray-200">San Francisco, CA</span>
+                </div>
+              </div>
+              
+              {/* Newsletter Signup */}
+              <div className="mt-6">
+                <h5 className="font-semibold mb-3">Stay Updated</h5>
+                <div className="flex">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-2 rounded-l-lg text-[#2b6777] focus:outline-none focus:ring-2 focus:ring-white"
+                  />
+                  <button className="bg-white text-[#2b6777] px-4 py-2 rounded-r-lg hover:bg-gray-100 transition-colors">
+                    <Heart className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-[#c8d8e4] mb-8">Empowering communication through AI technology</p>
-          <div className="flex justify-center space-x-6 text-sm text-[#c8d8e4]">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Contact</a>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-white/20 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className="text-gray-200 mb-4 md:mb-0">
+                © 2024 SpeakAI. All rights reserved.
+              </div>
+              <div className="flex space-x-6 text-sm">
+                <a href="#" className="text-gray-200 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" className="text-gray-200 hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" className="text-gray-200 hover:text-white transition-colors">Cookie Policy</a>
+                <a href="#" className="text-gray-200 hover:text-white transition-colors">Sitemap</a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
