@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -29,18 +30,27 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-purple-900 dark:to-blue-900">
-      <div className="pt-20 flex items-center justify-center min-h-screen px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#c8d8e4] via-[#f0f6f8] to-[#e8f2f5] dark:from-[#1a3a42] dark:via-[#2b6777] dark:to-[#1e4a54] relative overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 opacity-20">
+        <img 
+          src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
+      <div className="pt-20 flex items-center justify-center min-h-screen px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="w-full max-w-md"
         >
-          <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-2xl border-0">
+          <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-2xl border-0">
             <CardHeader className="text-center">
               <motion.div
-                className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center"
+                className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-[#2b6777] to-[#52bad5] rounded-full flex items-center justify-center shadow-xl"
                 animate={{ 
                   scale: [1, 1.05, 1],
                 }}
@@ -52,7 +62,7 @@ const Login = () => {
               >
                 <User className="w-8 h-8 text-white" />
               </motion.div>
-              <CardTitle className="text-2xl font-bold">
+              <CardTitle className="text-2xl font-bold text-[#2b6777]">
                 {isLogin ? 'Welcome Back' : 'Join SpeakAI'}
               </CardTitle>
               <p className="text-muted-foreground">
@@ -63,7 +73,7 @@ const Login = () => {
             <CardContent className="space-y-6">
               {/* Social Login Buttons */}
               <div className="space-y-3">
-                <Button variant="outline" className="w-full" type="button">
+                <Button variant="outline" className="w-full border-[#2b6777]/20 hover:bg-[#2b6777]/5" type="button">
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -73,7 +83,7 @@ const Login = () => {
                   Continue with Google
                 </Button>
                 
-                <Button variant="outline" className="w-full" type="button">
+                <Button variant="outline" className="w-full border-[#2b6777]/20 hover:bg-[#2b6777]/5" type="button">
                   <Github className="w-5 h-5 mr-2" />
                   Continue with GitHub
                 </Button>
@@ -102,7 +112,7 @@ const Login = () => {
                       placeholder="Full Name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="pl-10"
+                      className="pl-10 border-[#2b6777]/20 focus:border-[#2b6777] focus:ring-[#2b6777]"
                       required={!isLogin}
                     />
                   </motion.div>
@@ -116,7 +126,7 @@ const Login = () => {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="pl-10"
+                    className="pl-10 border-[#2b6777]/20 focus:border-[#2b6777] focus:ring-[#2b6777]"
                     required
                   />
                 </div>
@@ -129,14 +139,14 @@ const Login = () => {
                     placeholder="Password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="pl-10"
+                    className="pl-10 border-[#2b6777]/20 focus:border-[#2b6777] focus:ring-[#2b6777]"
                     required
                   />
                 </div>
 
                 {isLogin && (
                   <div className="text-right">
-                    <a href="#" className="text-sm text-primary hover:underline">
+                    <a href="#" className="text-sm text-[#2b6777] hover:underline">
                       Forgot password?
                     </a>
                   </div>
@@ -148,7 +158,7 @@ const Login = () => {
                 >
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                    className="w-full bg-gradient-to-r from-[#2b6777] to-[#52bad5] hover:from-[#1e4a54] hover:to-[#3a8fa5] text-white shadow-xl"
                   >
                     {isLogin ? 'Sign In' : 'Create Account'}
                   </Button>
@@ -162,7 +172,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setIsLogin(!isLogin)}
-                  className="text-primary hover:underline font-medium"
+                  className="text-[#2b6777] hover:underline font-medium"
                 >
                   {isLogin ? 'Sign up' : 'Sign in'}
                 </button>
@@ -171,9 +181,9 @@ const Login = () => {
               {!isLogin && (
                 <p className="text-xs text-muted-foreground text-center">
                   By creating an account, you agree to our{' '}
-                  <a href="#" className="text-primary hover:underline">Terms of Service</a>{' '}
+                  <a href="#" className="text-[#2b6777] hover:underline">Terms of Service</a>{' '}
                   and{' '}
-                  <a href="#" className="text-primary hover:underline">Privacy Policy</a>
+                  <a href="#" className="text-[#2b6777] hover:underline">Privacy Policy</a>
                 </p>
               )}
             </CardContent>
