@@ -11,6 +11,7 @@ import Practice from "./pages/Practice";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import Navigation from "./components/Navigation";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />

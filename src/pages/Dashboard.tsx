@@ -1,10 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import Navigation from '@/components/Navigation';
 import { Link } from 'react-router-dom';
 import { 
   MessageSquare, 
@@ -77,8 +75,6 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-purple-900 dark:to-blue-900">
-      <Navigation />
-      
       <div className="pt-20 px-4 pb-8">
         <div className="container mx-auto">
           {/* Welcome Section */}
